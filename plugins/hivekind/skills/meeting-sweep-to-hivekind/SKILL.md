@@ -1,11 +1,13 @@
 ---
 name: "meeting-sweep-to-hivekind"
-description: "Sweep today's meeting notes from Granola or Google Meet's Gemini notes into Hivekind as contacts, accounts, debrief notes and follow-up tasks. Use when asked to sweep, log or sync meetings into Hivekind."
+description: "Sweep recent meeting notes (yesterday and today) from Granola or Google Meet's Gemini notes into Hivekind as contacts, accounts, debrief notes and follow-up tasks. Use when asked to sweep, log or sync meetings into Hivekind."
 ---
 
 # Meeting sweep to Hivekind
 
-Sweep TODAY's meetings from the user's notetaker and update their Hivekind workspace. Works for any Hivekind user; nothing about the user is hardcoded.
+Sweep the user's recent meetings from their notetaker and update their Hivekind workspace. Works for any Hivekind user; nothing about the user is hardcoded.
+
+The sweep window is yesterday and today, so it is safe to run on a schedule (for example 6 am and 6 pm): the morning run picks up last evening's meetings, and meetings already swept are skipped.
 
 ## Setup
 
@@ -13,7 +15,7 @@ Sweep TODAY's meetings from the user's notetaker and update their Hivekind works
    - OWNER_EMAIL = the user's email
    - INTERNAL_DOMAIN = the domain of OWNER_EMAIL (treat free-mail domains as having no internal domain)
    - TZ = the user's time zone if known, otherwise ask once; in an unattended run, use America/Los_Angeles and say so in the report.
-2. Get today's date in TZ (YYYY-MM-DD).
+2. Set the sweep window in TZ: WINDOW = yesterday 00:00 through now. If the user names a different range ("sweep this week"), use that instead. Each meeting keeps its own date, MEETING_DATE (YYYY-MM-DD in TZ, from its start time); use MEETING_DATE, never the run date, in note titles and duplicate checks.
 3. Pick the notes source. Load tools with ToolSearch and use whichever is connected:
    - Granola: list_meetings / search_meetings, get_meetings, get_meeting_transcript. SOURCE = "Granola".
    - Gemini (Google Meet): Google Drive (search_files, read_file_content, get_file_metadata) and Google Calendar (list_events, get_event). SOURCE = "Gemini".
@@ -25,19 +27,19 @@ Sweep TODAY's meetings from the user's notetaker and update their Hivekind works
 ## Step 1 - Meetings
 
 Granola:
-- List today's meetings, then get_meetings for full notes (transcript only if notes are thin). MEETING_ID = Granola note ID.
+- List meetings in WINDOW, then get_meetings for full notes (transcript only if notes are thin). MEETING_ID = Granola note ID.
 - Skip meetings in a folder named Private.
 
 Gemini:
-- Search Drive for Google Docs created today whose title contains "Notes by Gemini" (usually in "Meet Recordings"). Open the matching "Transcript" doc only if notes are thin. MEETING_ID = Drive file ID.
+- Search Drive for Google Docs created in WINDOW whose title contains "Notes by Gemini" (usually in "Meet Recordings"). Open the matching "Transcript" doc only if notes are thin. MEETING_ID = Drive file ID.
 - Match each doc to its Calendar event (title and start time) for attendee emails; prefer the calendar's emails.
 - Skip meetings whose calendar event is marked Private or whose doc is in a folder named Private.
 - Gemini only saves notes to the organizer's Drive; mention in the report that meetings organized by others are missed unless the notes were shared.
 
 Both sources:
-- If no meetings, report "No <SOURCE> meetings today" and stop.
+- If no meetings, report "No <SOURCE> meetings in the window" and stop.
 - Skip any meeting whose title or text says "Private - Skip". THIS IS A MUST.
-- Skip a meeting if Hivekind already has a note titled "<SOURCE> debrief <today>: <meeting title>" (or containing its MEETING_ID) on any attendee's contact or account. Check with notes list before writing.
+- Skip a meeting if Hivekind already has a note titled "<SOURCE> debrief <MEETING_DATE>: <meeting title>" (or containing its MEETING_ID) on any attendee's contact or account. Check with notes list before writing. Most meetings from yesterday will already be swept; skipping them is expected, so count them as skipped in the report rather than reprocessing them.
 
 ## Step 2 - Contacts and accounts
 
@@ -49,7 +51,7 @@ Both sources:
 
 ## Step 3 - Notes
 
-- One note per meeting. Title: "<SOURCE> debrief <YYYY-MM-DD>: <meeting title>". Put it on the contact for person-level discussions, or on the account when the discussion was about the company (deal, pricing, partnership, multiple attendees from the same company). Do not duplicate across both.
+- One note per meeting. Title: "<SOURCE> debrief <MEETING_DATE>: <meeting title>". Put it on the contact for person-level discussions, or on the account when the discussion was about the company (deal, pricing, partnership, multiple attendees from the same company). Do not duplicate across both.
 - Body (markdown, short): MEETING_ID (and Drive link for Gemini); attendees; what was learned; decisions; next steps with owners and dates if stated.
 - Business content only. Leave out personal, health, family, financial-personal or other sensitive details unrelated to the deal, since notes are visible to the whole workspace. State only what the notes show. Gemini's "Suggested next steps" can misattribute owners; confirm against the notes body or transcript.
 
@@ -61,6 +63,10 @@ Both sources:
 - Link each task to the contact or account. Decision rationale: one line on why the task exists, citing MEETING_ID.
 - Before creating, check existing open tasks for the same contact/account so a rerun does not duplicate.
 
+## Running on a schedule
+
+To run the sweep twice a day, the user can ask Claude to create a scheduled task at 6 am and 6 pm in their time zone with the prompt "Sweep my recent meetings into Hivekind." The Hivekind connector and the notetaker connectors must be enabled for the task. In an unattended run, do not ask questions: use the defaults above and list any assumptions in the report.
+
 ## Rules
 
 Never delete, merge or overwrite existing records. No sends or campaigns. Credit-billed operations are fine; customers expect them.
@@ -71,4 +77,4 @@ Plain and direct. No filler, puffery, "moreover/furthermore/additionally/notably
 
 ## Report (under 10 lines)
 
-Source(s) used; meetings processed and skipped; contacts/accounts created (names); notes added; tasks created (title + due date); anything ambiguous (company guesses, existing records not imported, unclear owners, failed writes, time zone assumed).
+Source(s) used; window swept; meetings processed and skipped; contacts/accounts created (names); notes added; tasks created (title + due date); anything ambiguous (company guesses, existing records not imported, unclear owners, failed writes, time zone assumed).

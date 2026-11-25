@@ -6,7 +6,7 @@ GTM system skills for Claude, packaged as a plugin marketplace.
 
 | Plugin | Skills | Requires |
 |---|---|---|
-| `hivekind` | `meeting-sweep-to-hivekind`: sweeps today's Granola or Gemini (Google Meet) notes into Hivekind contacts, accounts, debrief notes and tasks | Hivekind connector, plus Granola or Google Drive and Google Calendar |
+| `hivekind` | `meeting-sweep-to-hivekind`: sweeps yesterday's and today's Granola or Gemini (Google Meet) notes (safe to schedule, e.g. 6 am and 6 pm) into Hivekind contacts, accounts, debrief notes and tasks | Hivekind connector, plus Granola or Google Drive and Google Calendar |
 | | `founder-daily-brief`: one morning list of replies waiting, unconverted action items, overdue tasks, stage changes and new signals; offers to turn action items into tasks | Hivekind connector |
 | | `meeting-prep-brief`: brief before a call with account history, buying group, ICP score, signals and intro paths | Hivekind connector; Google Calendar or Granola optional |
 | | `warm-intro-finder`: ranks a target list by who on the team can introduce you; optionally creates intro-request tasks | Hivekind connector with LinkedIn synced |
