@@ -7,7 +7,7 @@ description: "Sweep recent meeting notes (yesterday and today) from Granola or G
 
 Sweep the user's recent meetings from their notetaker and update their Hivekind workspace. Works for any Hivekind user; nothing about the user is hardcoded.
 
-The sweep window is yesterday and today, so it is safe to run on a schedule (for example 6 am and 6 pm): the morning run picks up last evening's meetings, and meetings already swept are skipped.
+The sweep window is yesterday and today, so it is safe to run on a schedule (for example 6 am, 12 noon and 6 pm): the morning run picks up last evening's meetings, and meetings already swept are skipped.
 
 ## Setup
 
@@ -65,7 +65,7 @@ Both sources:
 
 ## Running on a schedule
 
-To run the sweep twice a day, the user can ask Claude to create a scheduled task at 6 am and 6 pm in their time zone with the prompt "Sweep my recent meetings into Hivekind." The Hivekind connector and the notetaker connectors must be enabled for the task. In an unattended run, do not ask questions: use the defaults above and list any assumptions in the report.
+To run the sweep three times a day, the user can ask Claude to create a scheduled task at 6 am, 12 noon and 6 pm in their time zone with the prompt "Sweep my recent meetings into Hivekind." The Hivekind connector and the notetaker connectors must be enabled for the task. In an unattended run, do not ask questions: use the defaults above and list any assumptions in the report.
 
 ## Rules
 
