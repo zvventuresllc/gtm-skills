@@ -12,8 +12,8 @@
     {
       "name": "hivekind",
       "source": "./plugins/hivekind",
-      "description": "Skills for Hivekind users: sync meeting notes from Granola or Gemini into Hivekind contacts, accounts, notes and tasks.",
-      "version": "0.2.0",
+      "description": "Skills for Hivekind users: meeting sweeps, daily briefs, meeting prep, warm intros, event follow-up and outbound campaign setup.",
+      "version": "0.3.0",
       "category": "sales",
       "keywords": [
         "hivekind",
@@ -21,7 +21,10 @@
         "crm",
         "granola",
         "gemini",
-        "meetings"
+        "meetings",
+        "events",
+        "outbound",
+        "warm-intros"
       ]
     }
   ]

@@ -1,7 +1,7 @@
 {
   "name": "hivekind",
-  "version": "0.2.0",
-  "description": "Skills for Hivekind users: sync meeting notes from Granola or Gemini into Hivekind contacts, accounts, notes and tasks.",
+  "version": "0.3.0",
+  "description": "Skills for Hivekind users: meeting sweeps, daily briefs, meeting prep, warm intros, event follow-up and outbound campaign setup.",
   "author": {
     "name": "Hivekind AI",
     "email": "raj@hivekind.ai",
@@ -10,5 +10,5 @@
   "homepage": "https://hivekind.ai",
   "repository": "https://github.com/zvventuresllc/gtm-skills",
   "license": "Apache-2.0",
-  "keywords": ["hivekind", "gtm", "crm", "granola", "gemini", "meetings"]
+  "keywords": ["hivekind", "gtm", "crm", "granola", "gemini", "meetings", "events", "outbound", "warm-intros"]
 }
