@@ -18,7 +18,7 @@ Sweep TODAY's meetings from the user's notetaker and update their Hivekind works
    - Granola: list_meetings / search_meetings, get_meetings, get_meeting_transcript. SOURCE = "Granola".
    - Gemini (Google Meet): Google Drive (search_files, read_file_content, get_file_metadata) and Google Calendar (list_events, get_event). SOURCE = "Gemini".
    - If both are connected, sweep both and de-duplicate meetings by title and start time. If neither is connected, tell the user which connector to add and stop.
-4. Load Hivekind domains: mcp__Hivekind__domain_accounts_v2, mcp__Hivekind__domain_tasks_v2, and the workspace domain for polling jobs.
+4. Load the Hivekind domain tools with ToolSearch (search "Hivekind domain"). Names depend on how Hivekind was connected, e.g. mcp__Hivekind__domain_accounts_v2 for a custom connector or mcp__plugin_hivekind_hivekind__domain_accounts_v2 via this plugin. You need the accounts, tasks and workspace domains. If none are found, tell the user to connect Hivekind (MCP URL https://api-v2.hive-loop.com/mcp) and stop.
 5. Hivekind is V2 domain discovery. For each operation: call the domain with params={action:"discover",query:"<task>"}, then params={action:"describe",operation:"<exact .v2 ID>"} and read its schema, prerequisites and effects, then params={action:"invoke",operation:"<ID>",arguments:{...},operation_id:"<new UUID>"}. Reuse a UUID only to retry the same write. Never guess IDs or pass workspace_id/user_id. Poll queued jobs through the workspace domain until done.
 6. Operations you will need: contact and account search, notes list/create (accounts domain), prospects.import.start.v2 (accounts domain), tasks.create.batch.v2 (tasks domain).
 
@@ -63,7 +63,7 @@ Both sources:
 
 ## Rules
 
-Never delete, merge or overwrite existing records. No sends, campaigns or paid operations.
+Never delete, merge or overwrite existing records. No sends or campaigns. Credit-billed operations are fine; customers expect them.
 
 ## Style
 

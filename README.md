@@ -17,7 +17,16 @@ In Claude Code:
 /plugin install hivekind@gtm-skills
 ```
 
-In the Claude app, add this repository as a plugin marketplace from the plugin settings, then install `hivekind`.
+The plugin connects the Hivekind MCP server (`https://api-v2.hive-loop.com/mcp`). Sign in to Hivekind and pick your workspace when prompted.
+
+In the Claude app, add this repository as a plugin marketplace from the plugin settings, then install `hivekind`. If Hivekind is not already connected:
+
+1. Open Customize → Connectors → Add custom connector.
+2. Paste the MCP URL: `https://api-v2.hive-loop.com/mcp`
+3. Click Connect, sign in to Hivekind, pick your workspace, and Allow.
+4. Enable the Hivekind connector in the chat before asking it to use tools.
+
+Connect Granola, or Google Drive and Google Calendar for Gemini notes, the same way.
 
 ## Use
 
