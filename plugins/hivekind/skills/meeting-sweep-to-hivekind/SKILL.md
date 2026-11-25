@@ -63,7 +63,7 @@ Both sources:
 
 ## Rules
 
-Never delete, merge or overwrite existing records. No sends, campaigns or paid operations.
+Never delete, merge or overwrite existing records. No sends or campaigns. Credit-billed operations are fine; customers expect them.
 
 ## Style
 
