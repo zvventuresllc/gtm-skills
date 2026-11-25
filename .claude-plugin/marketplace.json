@@ -1,0 +1,21 @@
+{
+  "name": "gtm-skills",
+  "owner": {
+    "name": "Hivekind AI",
+    "email": "raj@hivekind.ai"
+  },
+  "metadata": {
+    "description": "GTM system skills for Claude, starting with Hivekind workflows.",
+    "version": "0.1.0"
+  },
+  "plugins": [
+    {
+      "name": "hivekind",
+      "source": "./plugins/hivekind",
+      "description": "Skills for Hivekind users: sync meeting notes from Granola or Gemini into Hivekind contacts, accounts, notes and tasks.",
+      "version": "0.1.0",
+      "category": "sales",
+      "keywords": ["hivekind", "gtm", "crm", "granola", "gemini", "meetings"]
+    }
+  ]
+}
